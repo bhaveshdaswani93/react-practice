@@ -1,7 +1,7 @@
-import React,{ Component } from 'react';
+import React,{ PureComponent } from 'react';
 import Person from './Person/Person'
 
-class Persons extends Component 
+class Persons extends PureComponent 
  {
   //  static getDerivedStateFromProps(props,state)
   //  {
@@ -9,13 +9,19 @@ class Persons extends Component
   //    return state;
   //  }
 
-   shouldComponentUpdate(nextProps,nextState) {
-     
-    console.log(`[Persons.js] should component update state called.`)
-    console.log(`[Persons.js] should component update state called.`,this.props)
-    console.log(`[Persons.js] should component update state called.`,nextProps)
-     return true;
-   }
+  //  shouldComponentUpdate(nextProps,nextState) {
+  //   console.log(`[Persons.js] should component update state called.`)
+  //   if(nextProps.persons !== this.props.persons) {
+  //     return true
+  //   } else {
+  //     return false;
+  //   }
+
+  //   // console.log(`[Persons.js] should component update state called.`)
+  //   // console.log(`[Persons.js] should component update state called.`,this.props)
+  //   // console.log(`[Persons.js] should component update state called.`,nextProps)
+  //   //  return true;
+  //  }
 
    render() {
      console.log(`[Persons.js] Render hook called.`)
@@ -27,6 +33,7 @@ class Persons extends Component
                   age={person.age} 
                   click={(event)=>this.props.clicked(index,event)} 
                   change = {(event)=>this.props.changed(person.id,event)}
+                  isAuth = {this.props.isAuthenticated}
       />
     })
    }
@@ -42,6 +49,11 @@ class Persons extends Component
     console.log('[Persons.js] component did update',prevProps);
     console.log(`[Persons.js] component did update.`,this.props)
    }
+
+   componentWillUnmount() {
+     console.log('[Persons.js] componentwill unmount');
+   }
+   
   
 }
 
